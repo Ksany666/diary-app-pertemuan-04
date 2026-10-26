@@ -1,39 +1,13 @@
 // src/styles/tokens.js
 export const COLORS = {
   surface: '#FFFFFF',
-  background: '#F8FAFC',
-  border: '#E2E8F0',
-  text: '#0F172A',
-  muted: '#64748B',
+  border: '#E5E7EB',
+  text: '#111827',
+  muted: '#6B7280',
   accent: '#2563EB',
-  moodHappy: '#10B981',
-  moodFocus: '#3B82F6',
-  moodCalm: '#F59E0B',
-  moodIdea: '#8B5CF6',
-  moodReview: '#EF4444',
 };
 
-export const SPACE = {
-  xs: 4,
-  s: 8,
-  m: 12,
-  l: 16,
-  xl: 24,
-};
-
-export const RADIUS = {
-  card: 12,
-  avatar: 32,
-  badge: 8,
-};
-
-export const TYPO = {
-  h1: 24,
-  title: 16,
-  body: 14,
-  caption: 12,
-};
-
-export const BREAKPOINTS = {
-  tablet: 600, // px
-};
+export const SPACE = { xs: 4, s: 8, m: 12, l: 16, xl: 24 };
+export const RADIUS = { card: 12, avatar: 32 };
+export const TYPO = { h1: 24, title: 16, body: 14, caption: 12 };
+export const BREAKPOINTS = { tablet: 600 };

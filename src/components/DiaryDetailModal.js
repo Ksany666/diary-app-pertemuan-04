@@ -1,127 +1,47 @@
 import React from 'react';
-import {
-  Modal,
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-  SafeAreaView,
-} from 'react-native';
+import { Modal, View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { COLORS, SPACE, RADIUS, TYPO } from '../styles/tokens';
 
 export default function DiaryDetailModal({ visible, onClose, entry }) {
   if (!entry) return null;
-  const { title, date, body, preview, moodUri, heroUri, mood, moodColor } = entry;
-  const activeColor = moodColor || COLORS.accent;
+  const { title, date, body, moodImage } = entry;
 
   return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      presentationStyle="pageSheet"
-      onRequestClose={onClose}
-    >
-      <SafeAreaView style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-          <Image
-            source={{ uri: heroUri || moodUri }}
-            style={styles.hero}
-            accessible={true}
-            accessibilityLabel={`Gambar sampul catatan ${title}`}
-          />
-          <View style={styles.content}>
-            <View style={styles.metaRow}>
-              <Text style={styles.date}>{date}</Text>
-              {mood && (
-                <View style={[styles.badge, { backgroundColor: activeColor }]}>
-                  <Text style={styles.badgeText}>{mood}</Text>
-                </View>
-              )}
-            </View>
-
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.body}>{body || preview}</Text>
-
-            <Pressable
-              onPress={onClose}
-              style={[styles.button, { backgroundColor: activeColor }]}
-              accessible={true}
-              accessibilityRole="button"
-              accessibilityLabel="Tutup detail buku harian"
-            >
-              <Text style={styles.buttonText}>Tutup Catatan</Text>
-            </Pressable>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+    <Modal visible={visible} animationType="slide">
+      <View style={styles.container}>
+        <Image source={moodImage} style={styles.hero} />
+        <View style={styles.content}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.body}>{body}</Text>
+          <Pressable onPress={onClose} style={styles.button}>
+            <Text style={styles.buttonText}>Tutup</Text>
+          </Pressable>
+        </View>
+      </View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.surface,
-  },
-  scrollContent: {
-    paddingBottom: SPACE.xl,
-  },
+  container: { flex: 1, backgroundColor: COLORS.surface },
   hero: {
     width: '100%',
     aspectRatio: 16 / 9,
-    backgroundColor: '#CBD5E1',
+    backgroundColor: '#ddd',
     borderBottomLeftRadius: RADIUS.card,
     borderBottomRightRadius: RADIUS.card,
   },
-  content: {
-    padding: SPACE.l,
-    gap: SPACE.s,
-  },
-  metaRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: SPACE.xs,
-  },
-  date: {
-    fontSize: TYPO.caption,
-    color: COLORS.muted,
-  },
-  badge: {
-    paddingHorizontal: SPACE.s,
-    paddingVertical: 4,
-    borderRadius: RADIUS.badge,
-  },
-  badgeText: {
-    color: '#FFFFFF',
-    fontSize: 11,
-    fontWeight: '700',
-    textTransform: 'uppercase',
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: COLORS.text,
-  },
-  body: {
-    fontSize: TYPO.body,
-    color: COLORS.text,
-    lineHeight: 22,
-    marginTop: SPACE.s,
-  },
+  content: { padding: SPACE.l, gap: SPACE.s },
+  title: { fontSize: 20, fontWeight: '700', color: COLORS.text },
+  date: { fontSize: TYPO.caption, color: COLORS.muted, marginBottom: SPACE.s },
+  body: { fontSize: TYPO.body, color: COLORS.text, lineHeight: 20 },
   button: {
-    marginTop: SPACE.xl,
-    paddingVertical: SPACE.m,
+    marginTop: SPACE.l,
+    padding: SPACE.m,
     borderRadius: RADIUS.card,
+    backgroundColor: COLORS.accent,
     alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 48,
   },
-  buttonText: {
-    color: '#FFFFFF',
-    fontWeight: '700',
-    fontSize: 15,
-  },
+  buttonText: { color: '#fff', fontWeight: '700' },
 });
